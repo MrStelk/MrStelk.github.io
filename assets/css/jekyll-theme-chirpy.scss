@@ -1,6 +1,5 @@
 ---
 ---
-
 /* prettier-ignore */
 @use 'main
 {%- if jekyll.environment == 'production' -%}
@@ -9,3 +8,68 @@
 ';
 
 /* append your custom style below */
+
+#category-view {
+  margin-top: 2rem; /* or 1.5rem / 2rem as per your spacing needs */
+}
+
+
+:root {
+  --toggle-border-color: #333434;
+  --toggle-heading-color: #aaa;
+  --toggle-btn-bg: #232323;
+  --toggle-btn-color: #aaa;
+  --toggle-btn-border: #aaa;
+  --toggle-active-bg: #404040;
+  --toggle-active-color: #fff;
+  --toggle-active-border: #aaa;
+  --toggle-hover-bg: #404040;
+  --toggle-hover-color: #fff;
+  --toggle-hover-border: #fff;
+}
+
+
+/* Toggle Container */
+#view-toggle {
+  border-bottom: 2px solid var(--toggle-border-color, #ddd);
+  padding-bottom: 0.3rem;
+  background-color: var(--toggle-bg, transparent); /* Optional */
+}
+
+/* Heading */
+#view-toggle h2 {
+  font-weight: 600;
+  font-size: 1.5rem;
+  padding-bottom:1rem;
+  color: var(--toggle-heading-color, #aaa);
+}
+
+#view-toggle .btn-group .btn-custom {
+  font-size: 0.8rem;
+  padding: 0.5rem 0.75rem;
+  background-color: var(--toggle-btn-bg, #232323);
+  color: var(--toggle-btn-color, #aaa);
+  border: 1px solid var(--toggle-btn-border, #aaa);
+  transition: all 0.2s ease-in-out;
+}
+
+#view-toggle .btn-group .btn-custom.active {
+  background-color: var(--toggle-active-bg, #404040);
+  color: var(--toggle-active-color, #fff);
+  border-color: var(--toggle-active-border, #aaa);
+}
+
+/* Regular hover styles */
+#view-toggle .btn-group .btn-custom:hover {
+  background-color: var(--toggle-hover-bg, #404040);
+  color: var(--toggle-hover-color, #fff);
+  border-color: var(--toggle-hover-border, #fff);
+}
+
+/* Disable hover on active button */
+#view-toggle .btn-group .btn-custom.active:hover {
+  background-color: var(--toggle-active-bg, #404040);
+  color: var(--toggle-active-color, #fff);
+  border-color: var(--toggle-active-border, #aaa);
+}
+

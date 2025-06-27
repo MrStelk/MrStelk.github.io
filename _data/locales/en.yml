@@ -3,18 +3,21 @@
 # ----- Commons label -----
 
 layout:
-  post: Post
+  post: blog
   category: Category
   tag: Tag
 
 # The tabs of sidebar
 tabs:
   # format: <filename_without_extension>: <value>
-  home: Home
-  categories: Categories
-  tags: Tags
-  archives: Archives
+  home: /
   about: About
+  research: Research
+  blog: Blog
+  # categories: Categories
+  # tags: Tags
+  # archives: Archives
+  
 
 # the text displayed in the search bar & search results
 search:

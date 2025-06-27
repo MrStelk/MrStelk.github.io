@@ -1,19 +1,13 @@
 <!-- The Top Bar -->
 
-<header id="topbar-wrapper" class="flex-shrink-0" aria-label="Top Bar">
+<header id="topbar-wrapper" class="flex-shrink-0" aria-label="Top Bar" style="margin-top: 20px;">
   <div
     id="topbar"
     class="d-flex align-items-center justify-content-between px-lg-3 h-100"
   >
     <nav id="breadcrumb" aria-label="Breadcrumb">
       {% assign paths = page.url | split: '/' %}
-
-      {% if paths.size == 0 or page.layout == 'home' %}
-        <!-- index page -->
-        <span>{{ site.data.locales[include.lang].tabs.home | capitalize }}</span>
-
-      {% else %}
-        {% for item in paths %}
+        {% for item in paths %}    
           {% if forloop.first %}
             <span>
               <a href="{{ '/' | relative_url }}">
@@ -27,8 +21,8 @@
             {% else %}
               <span>{{ page.title }}</span>
             {% endif %}
-
-          {% elsif page.layout == 'category' or page.layout == 'tag' %}
+          
+          {% elsif page.layout == 'eachblog' or page.layout == 'tag' %}
             <span>
               <a href="{{ item | append: '/' | relative_url }}">
                 {{- site.data.locales[include.lang].tabs[item] | default: page.title -}}
@@ -36,7 +30,6 @@
             </span>
           {% endif %}
         {% endfor %}
-      {% endif %}
     </nav>
     <!-- endof #breadcrumb -->
 
@@ -45,7 +38,7 @@
     </button>
 
     <div id="topbar-title">
-      {% if page.layout == 'home' %}
+      {% if page.layout == 'blog' %}
         {{- site.data.locales[include.lang].title | default: site.title -}}
       {% elsif page.collection == 'tabs' or page.layout == 'page' %}
         {%- capture tab_key -%}{{ page.url | split: '/' }}{%- endcapture -%}
