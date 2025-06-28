@@ -168,7 +168,7 @@ const CONSTELLATIONS = [
         ]
     },
     {
-        name: "scorp",
+        name: "Scorp",
         points: [
             { x: 120, y: 65 },   // 0 - Antares (center bright star)
             { x: 145, y: 25 },   // 1 - top right star
@@ -191,7 +191,7 @@ const CONSTELLATIONS = [
         ]
     },
     {
-        name: "taurus",
+        name: "Taurus",
         points: [
             { x: 30, y: 30 },    // 0 - top left star
             { x: 80, y: 50 },    // 1 - upper middle star
@@ -210,7 +210,7 @@ const CONSTELLATIONS = [
         ]
     },
     {
-        name: "virgo",
+        name: "Virgo",
         points: [
             { x: 80, y: 40 },    // 0 - upper left star
             { x: 120, y: 70 },   // 1 - upper middle star
@@ -234,17 +234,57 @@ const CONSTELLATIONS = [
     }
 ];
 
-const constellationGroups = [
-    makeConstellation(CONSTELLATIONS[0].points, CONSTELLATIONS[0].lines, canvas.width - 200, 100),
-    makeConstellation(CONSTELLATIONS[1].points, CONSTELLATIONS[1].lines, -50, canvas.height - 250),
-    makeConstellation(CONSTELLATIONS[2].points, CONSTELLATIONS[2].lines, 50, 200),
-    makeConstellation(CONSTELLATIONS[3].points, CONSTELLATIONS[3].lines, 250, 200),
-    makeConstellation(CONSTELLATIONS[4].points, CONSTELLATIONS[4].lines, 750, 400),
-    makeConstellation(CONSTELLATIONS[5].points, CONSTELLATIONS[5].lines, canvas.width - 200, 400),
-    makeConstellation(CONSTELLATIONS[6].points, CONSTELLATIONS[6].lines, canvas.width / 2, -50),
-    makeConstellation(CONSTELLATIONS[7].points, CONSTELLATIONS[7].lines, 100, -80),
-    makeConstellation(CONSTELLATIONS[6].points, CONSTELLATIONS[6].lines, canvas.width-200, canvas.height-125),
+// Define placements of constellations (including duplicates)
+const CONSTELLATION_PLACEMENTS = [
+  { index: 0, x: () => canvas.width - 200, y: () => 100 },
+  { index: 1, x: () => -50, y: () => canvas.height - 250 },
+  { index: 2, x: () => 50, y: () => 200 },
+  { index: 3, x: () => 250, y: () => 200 },
+  { index: 4, x: () => 750, y: () => 400 },
+  { index: 5, x: () => canvas.width - 200, y: () => 400 },
+  { index: 6, x: () => canvas.width / 2, y: () => -50, "dont": true },
+  { index: 7, x: () => 100, y: () => -80 },
+  { index: 6, x: () => canvas.width - 200, y: () => canvas.height - 125} 
 ];
+
+// Conditionally exclude certain constellations on small screens
+function shouldShowConstellation(name, width, height) {
+    if (name === "Gemini" && width < 1100) return false;
+    if (name === "Big" && width < 300) return false;
+    if (name === "Sagittarius" && width < 700) return false;
+    if (name === "Virgo" && width < 500) return false;
+    if (name === "Scorp" && width < 1300) return false;
+    if (name === "Taurus" && width < 500) return false;
+    if (name === "Orion" && height < 500) return false;
+    if (name === "Taurus" && height < 800 && width < 1300) return false;
+    return true;
+}
+
+// Holds the generated constellations to draw
+let constellationGroups = [];
+
+// Regenerate constellation groups on resize
+function generateConstellationGroups() {
+    constellationGroups = [];
+
+    CONSTELLATION_PLACEMENTS.forEach(item => {
+        const c = CONSTELLATIONS[item.index];
+        if (!item.dont && !shouldShowConstellation(c.name, canvas.width, canvas.height)) {
+            return;
+        }
+        constellationGroups.push(
+            makeConstellation(c.points, c.lines, item.x(), item.y())
+        );
+    });
+}
+
+// React to window resize
+window.addEventListener('resize', () => {
+    resizeCanvas();
+    generateConstellationGroups();
+});
+resizeCanvas();
+generateConstellationGroups();
 
 function drawConstellations() {
     ctx.save();

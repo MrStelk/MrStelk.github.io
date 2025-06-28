@@ -8,11 +8,9 @@
 ';
 
 /* append your custom style below */
-
 #category-view {
-  margin-top: 2rem; /* or 1.5rem / 2rem as per your spacing needs */
+  margin-top: 2rem;
 }
-
 
 :root {
   --toggle-border-color: #333434;
@@ -28,19 +26,18 @@
   --toggle-hover-border: #fff;
 }
 
-
 /* Toggle Container */
 #view-toggle {
   border-bottom: 2px solid var(--toggle-border-color, #ddd);
   padding-bottom: 0.3rem;
-  background-color: var(--toggle-bg, transparent); /* Optional */
+  background-color: var(--toggle-bg, transparent);
 }
 
 /* Heading */
 #view-toggle h2 {
   font-weight: 600;
   font-size: 1.5rem;
-  padding-bottom:1rem;
+  padding-bottom: 1rem;
   color: var(--toggle-heading-color, #aaa);
 }
 
@@ -59,17 +56,81 @@
   border-color: var(--toggle-active-border, #aaa);
 }
 
-/* Regular hover styles */
 #view-toggle .btn-group .btn-custom:hover {
   background-color: var(--toggle-hover-bg, #404040);
   color: var(--toggle-hover-color, #fff);
   border-color: var(--toggle-hover-border, #fff);
 }
 
-/* Disable hover on active button */
 #view-toggle .btn-group .btn-custom.active:hover {
   background-color: var(--toggle-active-bg, #404040);
   color: var(--toggle-active-color, #fff);
   border-color: var(--toggle-active-border, #aaa);
 }
 
+/* Canvas styles for sidebar animation */
+#sidebar-canvas-container {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: inherit; /* Match sidebar border radius */
+}
+
+#sidebar-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: inherit;
+}
+
+/* Ensure sidebar positioning and layering - DON'T change position property */
+#sidebar {
+  /* Don't override position - let Chirpy's CSS handle sidebar positioning */
+  overflow: visible; /* Allow canvas to be positioned correctly */
+  
+  /* Ensure all content stays above canvas */
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+/* Specifically ensure these elements stay visible */
+#sidebar .profile-wrapper,
+#sidebar nav,
+#sidebar .sidebar-bottom {
+  position: relative;
+  z-index: 2;
+  background: transparent; /* Let canvas show through */
+}
+
+/* Add subtle backdrop for better text readability if needed */
+@media (prefers-reduced-motion: no-preference) {
+  #sidebar .profile-wrapper,
+  #sidebar nav ul,
+  #sidebar .sidebar-bottom {
+    backdrop-filter: blur(0.5px);
+    -webkit-backdrop-filter: blur(0.5px);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  #sidebar-canvas-container {
+    display: none; /* Hide animation on mobile for performance */
+  }
+}
+
+/* Reduce animation intensity for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  #sidebar-canvas-container {
+    display: none;
+  }
+}

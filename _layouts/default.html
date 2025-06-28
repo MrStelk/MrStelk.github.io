@@ -80,7 +80,7 @@ layout: compress
       {% assign _include_path = _include | append: '.html' %}
       {% include {{ _include_path }} %}
     {% endfor %}
-
     {% include_cached search-loader.html lang=lang %}
+    <script src="{{ '/assets/js/sidebar-canvas2.js' | relative_url }}"></script>
   </body>
 </html>
