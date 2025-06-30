@@ -21,7 +21,9 @@ function randomStartPosition() {
     }
 }
 
-const numStars = 150;
+
+
+const numStars = 100;
 for (let i = 0; i < numStars; i++) {
     const isShootingStar = Math.random() < 0.08; // Reduced probability for fewer shooting stars
     let speedX = 0.5 + Math.random() * 0.5;
@@ -291,8 +293,8 @@ function drawConstellations() {
     ctx.lineWidth = 1;
 
     // Reduced parallax effect
-    const offsetX = (mouseX / canvas.width - 0.5) * 10;
-    const offsetY = (mouseY / canvas.height - 0.5) * 10;
+    const offsetX = (mouseX / canvas.width - 0.5) * 15;
+    const offsetY = (mouseY / canvas.height - 0.5) * 15;
 
     constellationGroups.forEach(group => {
         group.stars.forEach((star) => {
@@ -326,7 +328,7 @@ function drawConstellations() {
 }
 
 function drawStars() {
-    ctx.fillStyle = "rgba(23, 23, 23, 0.4)";
+    ctx.fillStyle = "rgba(23, 23, 23, 0.35)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     drawConstellations();
     
@@ -442,8 +444,8 @@ canvas.addEventListener('mousemove', e => {
   mouseX = e.clientX;
   mouseY = e.clientY;
 
-  const offsetX = (e.clientX / canvas.width - 0.5) * 10;
-  const offsetY = (e.clientY / canvas.height - 0.5) * 10;
+  const offsetX = (e.clientX / canvas.width - 0.5) * 15;
+  const offsetY = (e.clientY / canvas.height - 0.5) * 15;
 
   stars.forEach(star => {
     star.x += offsetX * 0.1;
@@ -457,9 +459,9 @@ canvas.addEventListener('mousemove', e => {
 });
 
 canvas.addEventListener('click', e => {
-    for (let i = 0; i < 7; i++) {
-        const angle = Math.random() * 0.5 * Math.PI;
-        const speed = Math.random() * 0.5 + 0.5;
+    for (let i = 0; i < 3; i++) {
+        const angle =  0.5 + Math.random() * 0.2;
+        const speed = 3 + Math.random() * 4;
         const star = {
             x: e.clientX,
             y: e.clientY,
@@ -468,7 +470,7 @@ canvas.addEventListener('click', e => {
             speedY: Math.sin(angle) * speed,
             alpha: 0,
             fadeIn: true,
-            isShootingStar: false,
+            isShootingStar: true,
             trail: [],
             glitterPhase: Math.random() * Math.PI * 2,
             glitterSpeed: 0.002 + Math.random() * 0.0005

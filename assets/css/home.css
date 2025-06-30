@@ -16,7 +16,7 @@ body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background: #313131;
+  background: rgba(23, 23, 23, 1.0);
   display: flex;
   justify-content: center;
   align-items: center;
