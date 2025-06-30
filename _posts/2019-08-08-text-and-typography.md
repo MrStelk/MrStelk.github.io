@@ -8,6 +8,7 @@ tags: [typography]
 pin: true
 math: true
 mermaid: true
+published: false
 ---
 
 ## Headings
