@@ -37,8 +37,33 @@
 #view-toggle h2 {
   font-weight: 600;
   font-size: 1.5rem;
-  padding-bottom: 1rem;
+  padding-bottom: 0rem;
+  margin-top:0rem;
+  padding-right:1rem;
   color: var(--toggle-heading-color, #aaa);
+  cursor: default;
+  text-decoration: none;
+}
+
+#view-heading > a.anchor {
+  display: none !important;
+}
+
+.blog-tags a {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--toggle-heading-color, #aaa);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.blog-tags a i {
+  font-size: 1rem; /* adjust as needed */
+}
+
+.blog-tags a:hover {
+  color: var(--toggle-hover-color, #fff); /* Or any hover color */
 }
 
 #view-toggle .btn-group .btn-custom {

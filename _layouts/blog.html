@@ -6,8 +6,15 @@ refactor: true
 
 <!-- Toggle with Icons and Heading -->
 <!-- Toggle Icons and Heading -->
-<div class="container mt-4" id="view-toggle">
-  <div class="d-flex justify-content-between align-items-center">
+<div class="container mt-4 d-flex justify-content-between" id="view-toggle">
+  <div class="d-flex align-items-center">
+    <span class="blog-tags">
+      <a href="{{ '/tags/' | relative_url }}">
+        <i class="fas fa-tags me-2"></i>Tags
+      </a>
+    </span>
+  </div>
+  <div class="d-flex justify-content-end align-items-center pb-2">
     <!-- Heading -->
     <h2 id="view-heading" class="mb-0">List</h2>
     <!-- Icon Buttons -->
@@ -21,6 +28,7 @@ refactor: true
     </div>
   </div>
 </div>
+
 
 
 
@@ -207,7 +215,7 @@ refactor: true
     btnCategories.classList.remove("active");
     allView.classList.remove("d-none");
     catView.classList.add("d-none");
-    heading.textContent = "List";
+    document.querySelector("#view-heading span.me-2").textContent = "List";
   });
 
   btnCategories.addEventListener("click", () => {
@@ -215,6 +223,6 @@ refactor: true
     btnAll.classList.remove("active");
     allView.classList.add("d-none");
     catView.classList.remove("d-none");
-    heading.textContent = "Categories";
+    document.querySelector("#view-heading span.me-2").textContent = "Categories";
   });
 </script>

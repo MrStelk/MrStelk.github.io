@@ -26,16 +26,26 @@
       </li> -->
       <!-- the real tabs -->
      {% for tab in site.tabs %}
-      {% unless tab.title == "Tags" %}
-        <li class="nav-item{% if tab.url == page.url %}{{ " active" }}{% endif %}">
-          <a href="{{ tab.url | relative_url }}" class="nav-link">
-            <i class="fa-fw {{ tab.icon }}"></i>
-            {% capture tab_name %}{{ tab.url | split: '/' }}{% endcapture %}
-            <span>{{ site.data.locales[include.lang].tabs.[tab_name] | default: tab.title | upcase }}</span>
-          </a>
-        </li>
-      {% endunless %}
-      {% endfor %}
+  {% unless tab.title == "Tags" %}
+    {% assign is_blog_active = false %}
+    {% if tab.url == page.url %}
+      {% assign is_blog_active = true %}
+    {% elsif tab.url == '/blog/' %}
+      {% if page.url contains '/tags/' %}
+        {% assign is_blog_active = true %}
+      {% endif %}
+    {% endif %}
+
+    <li class="nav-item{% if is_blog_active %} active{% endif %}">
+      <a href="{{ tab.url | relative_url }}" class="nav-link">
+        <i class="fa-fw {{ tab.icon }}"></i>
+        {% capture tab_name %}{{ tab.url | split: '/' }}{% endcapture %}
+        <span>{{ site.data.locales[include.lang].tabs.[tab_name] | default: tab.title | upcase }}</span>
+      </a>
+    </li>
+  {% endunless %}
+{% endfor %}
+
     </ul>
   </nav>
   

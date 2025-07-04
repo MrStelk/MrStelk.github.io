@@ -16,18 +16,47 @@
             </span>
 
           {% elsif forloop.last %}
-            {% if page.collection == 'tabs' %}
-              <span>{{ site.data.locales[include.lang].tabs[item] | default: page.title }}</span>
-            {% else %}
+            {% if page.collection == 'tabs' and page.layout == 'tags' %}
+              <span>
+                <a href="{{ '/blog/' | relative_url }}">
+                  {{ site.data.locales[include.lang].tabs.blog | default: 'Blog' }}
+                </a>
+              </span>
+              <span>{{ site.data.locales[include.lang].tabs[item] }}</span>
+            {% elsif page.collection == 'tabs' %}
+              <span>{{ site.data.locales[include.lang].tabs[item] }}</span>
+            {% elsif page.layout == 'eachblog' %}
+              <span>{{ page.title }}</span>
+            {% elsif page.layout == 'tag' %}
+              <span>{{ page.title }}</span>
+            {% elsif page.layout == 'category' %}
               <span>{{ page.title }}</span>
             {% endif %}
           
-          {% elsif page.layout == 'eachblog' or page.layout == 'tag' %}
+          {% elsif page.layout == 'eachblog'%}
             <span>
               <a href="{{ item | append: '/' | relative_url }}">
-                {{- site.data.locales[include.lang].tabs[item] | default: page.title -}}
+                {{- site.data.locales[include.lang].tabs[item] -}}
               </a>
             </span>
+
+          {% elsif page.layout == 'tag'%}
+            <span>
+              <a href="{{ '/blog/' | relative_url }}">
+                {{ site.data.locales[include.lang].tabs.blog | default: 'Blog' }}
+              </a>
+            </span>
+            <span>
+              <a href="{{ '/tags/' | relative_url }}">
+                {{ site.data.locales[include.lang].tabs.tags | default: 'Tags' }}
+              </a>
+            </span>
+          {% elsif page.layout == 'category'%}
+            <span>
+              <a href="{{ '/blog/' | relative_url }}">
+                {{ site.data.locales[include.lang].tabs.blog | default: 'Blog' }}
+              </a>
+            </span>        
           {% endif %}
         {% endfor %}
     </nav>
