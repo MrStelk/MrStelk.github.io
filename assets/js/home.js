@@ -21,8 +21,6 @@ function randomStartPosition() {
     }
 }
 
-
-
 const numStars = 100;
 for (let i = 0; i < numStars; i++) {
     const isShootingStar = Math.random() < 0.08; // Reduced probability for fewer shooting stars
@@ -314,7 +312,7 @@ function drawConstellations() {
         });
 
         ctx.beginPath();
-        ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+        ctx.strokeStyle = 'rgba(255,255,255,0.35)';
         group.lines.forEach(([i, j]) => {
             const p1 = group.stars[i];
             const p2 = group.stars[j];
@@ -328,7 +326,7 @@ function drawConstellations() {
 }
 
 function drawStars() {
-    ctx.fillStyle = "rgba(23, 23, 23, 0.35)";
+    ctx.fillStyle = "rgba(30, 30, 30, 1)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     drawConstellations();
     
@@ -344,7 +342,7 @@ function drawStars() {
         // Draw shooting star trail with parallax
         if (star.isShootingStar && star.trail.length > 1) {
             ctx.save();
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
             ctx.lineWidth = 2;
             ctx.lineCap = 'round';
             
